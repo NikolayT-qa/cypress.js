@@ -1,3 +1,5 @@
+import * as data from "../helpers/default_data.json"
+
 describe('Автотест авторизация', function () {
     it('Позитивная авторизация', function () {
        cy.visit('https://login.qa.studio/');
@@ -54,8 +56,8 @@ describe('Автотест авторизация', function () {
    
     it('Тест пукупки авататара', function () {
        cy.visit('https://pokemonbattle.ru/');   //заходим на сайт
-       cy.get('#k_email').type('LOGIN');   //вводим верный логин
-       cy.get('#k_password').type('PASSWORD');      //вводим верный пароль
+       cy.get('#k_email').type(data.login);   //вводим верный логин
+       cy.get('#k_password').type(data.password);      //вводим верный пароль
        cy.get('.MuiButton-root').click();       //нажимаем кнопку войти
        cy.get('.header_card_trainer').click();  //заходим на страницу тренера
        cy.get('[data-qa="shop"]').click();      //Переходим в магазин аватаров
@@ -64,6 +66,7 @@ describe('Автотест авторизация', function () {
        cy.get(':nth-child(1) > .style_1_base_input').type('11/26'); //вводим срок
        cy.get('.payment_form_card_form_inputs > :nth-child(2) > .style_1_base_input').type('125');  //вводим код
        cy.get('.payment_form_card_form_input_last > .style_1_base_input').type('German');   // вводим имя хозяина карты
+       cy.wait(2000);
        cy.get('.style_1_base_button_payment_body > .style_1_base_button_payment').click();  // нажимаем оплатить
        cy.get('.style_1_base_input').type('56456'); //вводим код подтверждения
        cy.get('.style_1_base_button_payment_body > .style_1_base_button_payment').click();  //нажимаем отправить
